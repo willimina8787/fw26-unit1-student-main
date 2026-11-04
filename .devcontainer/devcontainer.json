@@ -1,0 +1,31 @@
+{
+  "name": "Unit 1: IPC & Sockets Environment",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
+
+  // Delete stale Yarn APT source list to bypass GPG key failure, then install network tools
+  "postCreateCommand": "sudo rm -f /etc/apt/sources.list.d/yarn.list && sudo apt-get update && sudo apt-get install -y netcat-openbsd lsof procps net-tools iproute2",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter"
+      ]
+    }
+  },
+
+  "forwardPorts": [9090],
+  "portsAttributes": {
+    "9090": {
+      "label": "Unit 1 IPC Protocol Port",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "remoteUser": "vscode"
+}
